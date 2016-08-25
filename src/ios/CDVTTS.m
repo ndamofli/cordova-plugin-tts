@@ -35,6 +35,7 @@
 }
 
 - (void)speak:(CDVInvokedUrlCommand*)command {
+    [self.commandDelegate runInBackground:^{
     [[AVAudioSession sharedInstance] setActive:NO withOptions:0 error:nil];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback
       withOptions:AVAudioSessionCategoryOptionDuckOthers error:nil];
@@ -65,8 +66,10 @@
     utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:locale];
     // Rate expression adjusted manually for a closer match to other platform.
     utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 1.5 + AVSpeechUtteranceDefaultSpeechRate) / 2.5 * rate * rate;
-    utterance.pitchMultiplier = 1.2;
+    utterance.pitchMultiplier = 1.0;
     [synthesizer speakUtterance:utterance];
+    }];
+
 }
 
 @end
