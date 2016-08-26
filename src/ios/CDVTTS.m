@@ -46,7 +46,7 @@
     
     callbackId = command.callbackId;
     
-    [synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryWord];
+    [synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     
     NSDictionary* options = [command.arguments objectAtIndex:0];
     
